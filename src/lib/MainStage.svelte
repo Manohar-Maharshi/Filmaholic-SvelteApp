@@ -1,6 +1,6 @@
 <script>
 	import NavBar from './NavBar/NavBar.svelte';
-	// import Actors from './Actors/Actors.svelte';
+	import Actors from './Actors/Actors.svelte';
 
 	let selectedTab;
 
@@ -10,6 +10,6 @@
 
 <main>
 	<NavBar bind:currentTab={selectedTab}/>
-	<!-- <Actors /> -->
-	<!-- {selectedTab} -->
+	<Actors />
+	{selectedTab}
 </main>
