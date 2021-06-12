@@ -1,9 +1,9 @@
 <script>
-  import NavBar from './lib/NavBar.svelte';
+  import MainStage from '/src/lib/MainStage.svelte';
 </script>
 
 <main>
-  <NavBar />
+  <MainStage/>
 </main>
 
 <style>
