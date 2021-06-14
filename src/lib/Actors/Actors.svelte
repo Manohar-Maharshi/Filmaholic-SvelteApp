@@ -40,7 +40,7 @@
 <section>
 	<button bind:this={triggerEl} on:click={togglePanel}  class="pannel-toggle-btn {panelVisible ? 'active' : ''}">
 		{#if !panelVisible}
-			Trending Actors Across The World &nbsp <svg version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 cMQeyU"><g><path d="M4 16V4H2v12h2zM13 15l-1.5-1.5L14 11H6V9h8l-2.5-2.5L13 5l5 5-5 5z"></path></g></svg>
+			Trending Actors Around The World &nbsp <svg version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 cMQeyU"><g><path d="M4 16V4H2v12h2zM13 15l-1.5-1.5L14 11H6V9h8l-2.5-2.5L13 5l5 5-5 5z"></path></g></svg>
 		{:else}
 			<svg version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 cMQeyU"><g><path d="M4 16V4H2v12h2zM13 15l-1.5-1.5L14 11H6V9h8l-2.5-2.5L13 5l5 5-5 5z"></path></g></svg>
 		{/if}
@@ -49,7 +49,6 @@
 		<div hidden={!panelVisible} class="container">
 				<div class="header">
 					<p class="title">Popular Actors</p>
-					<SearchBar />
 				</div>
 				<div class="actors-list-container">
 					{#await promise}
@@ -73,9 +72,10 @@
 
 <style>
 	section{
-		z-index: 999999;
+		z-index: 999999 !important;
 	}
 	.container{
+		z-index: 999999 !important;
 		overflow-y: auto;
 		overflow-x: hidden;
 		position: absolute;
@@ -91,7 +91,6 @@
 	}
 	.header{ 
 		position: relative;
-		height: 6rem;
 	    display: flex;
 	    align-items: center;
 	    justify-content: space-between;
@@ -101,7 +100,6 @@
 	    border-top-left-radius: 0.3rem ;
 	    border-top-right-radius: 0.3rem ;
 	    padding:0 1rem;
-	    margin-bottom: 0.2rem;
 	    overflow: hidden;
 	}
 	.actors-list-container{
@@ -123,8 +121,8 @@
 	}
 	.end-text{
 		text-align: center;
-		color: #313131;
-		font-size: 0.8rem;
+		color: lightslategray;
+		font-size: 1rem;
 		margin-bottom: 0.2rem;
 	}
 	.pannel-toggle-btn{
