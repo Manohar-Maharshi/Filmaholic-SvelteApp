@@ -1,20 +1,39 @@
 <script>
+	import Loader from '/src/components/Loader.svelte'
 	import SearchBar from '/src/components/SearchBar.svelte'
-	import { Accordion, AccordionItem } from "svelte-accessible-accordion";
-	import { fade } from 'svelte/transition';
+	import ActorCard from './ActorCard.svelte'
 	import ClickOutside from 'svelte-click-outside';
 
 	let triggerEl;
-    let panelVisible = false;
+   let panelVisible = false;
 
 
-    function togglePanel() {
+   function togglePanel() {
       panelVisible = !panelVisible;
-    }
+   }
 
-    function hidePanel() {
+   function hidePanel() {
       panelVisible = false;
-    }
+   }
+	let movieTitle;
+	let promise = Promise.resolve([]);
+   async function getPopularActors() {
+   	const response = await fetch("https://api.themoviedb.org/3/person/popular?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&page=1");
+   	if (response.ok) {
+  			return response.json();
+		} else {
+			throw new Error(users);
+		}
+   }
+
+   promise = getPopularActors();
+   
+   function getActorMovieList(arr){
+   	arr.forEach((item)=>{
+   		movieTitle = item.title
+   	})
+   	return movieTitle
+   }
 </script>
 
 
@@ -28,15 +47,26 @@
 	</button>
 	<ClickOutside on:clickoutside={hidePanel} exclude={[triggerEl]} class="good">
 		<div hidden={!panelVisible} class="container">
-			<div class="header">
-				<p class="title">Popular Actors</p>
-				<SearchBar />
-			</div>
-			<Accordion>
-				<AccordionItem expanded title="Title 1">Content 1</AccordionItem>
-				<AccordionItem title="Title 2">Content 2</AccordionItem>
-		  		<AccordionItem title="Title 3">Content 2</AccordionItem>
-			</Accordion>
+				<div class="header">
+					<p class="title">Popular Actors</p>
+					<SearchBar />
+				</div>
+				<div class="actors-list-container">
+					{#await promise}
+						<Loader />
+					{:then items}
+						{#each items.results as item,index}
+							<ActorCard 
+									indexNumber="{index+1}" 
+									imgSrc="{item.profile_path}"
+									name="{item.name}"
+									popularityCount="{Math.floor(item.popularity)}"
+									moviesList="{getActorMovieList(item.known_for)}" 						
+							/>
+						{/each}
+					{/await}
+				</div>
+	  		<p class="end-text">This list updates daily</p>
 		</div>
 	</ClickOutside>
 </section>
@@ -46,6 +76,8 @@
 		z-index: 999999;
 	}
 	.container{
+		overflow-y: auto;
+		overflow-x: hidden;
 		position: absolute;
 		top: 0;
 		left: 1px;
@@ -68,9 +100,19 @@
 	    color: #dedee3;
 	    border-top-left-radius: 0.3rem ;
 	    border-top-right-radius: 0.3rem ;
-	    /*box-shadow: 0 1px 2px #000000e6,0 0px 2px #000000e6;*/
 	    padding:0 1rem;
 	    margin-bottom: 0.2rem;
+	    overflow: hidden;
+	}
+	.actors-list-container{
+		overflow-y: auto;
+		overflow-x: hidden;
+		margin-top: 1rem;
+		padding: 0.5rem 1rem;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
 	}
 	.title{
 		position: relative;
@@ -78,6 +120,12 @@
 		color: #9147ff;
 		font-size: 1.5rem;
 		margin-top:0.8rem;
+	}
+	.end-text{
+		text-align: center;
+		color: #313131;
+		font-size: 0.8rem;
+		margin-bottom: 0.2rem;
 	}
 	.pannel-toggle-btn{
 		border: 0;
@@ -110,7 +158,7 @@
 	}
 	.pannel-toggle-btn.active svg{
 		margin-left: 0.5rem;
-		 transform: rotate(180deg);
+		transform: rotate(180deg);
 	}
 	.pannel-toggle-btn svg{
 		margin-left: 0.7rem;
@@ -127,25 +175,4 @@
 	.pannel-toggle-btn:hover{
 		background-color: rgba(255, 255, 255, 0.2);
 	}
-	/*:global([data-accordion]) {
-		list-style: none;
-		margin-bottom: 1rem;
-	}
-
-	:global([data-accordion-item] button) {
-		border: 0;
-		border-bottom: 1px solid #000;
-		font: inherit;
-		line-height: inherit;
-		color: #000;
-		cursor: pointer;
-		padding: 0.5rem 1rem;
-		width: 100%;
-		text-align: left;
-		margin: 0;
-	}
-
-	:global([data-accordion-item] [role="region"]) {
-		padding: 2rem;
-	}*/
 </style>

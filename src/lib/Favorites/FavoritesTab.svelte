@@ -1,3 +1,6 @@
+
+
+
 <buttom class="favorites" data-tooltip="Favorites" data-tooltip-location="bottom">
 	<span>Favorites</span>
 	<svg type="color-fill-current" width="20px" height="20px" version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScSvg-sc-1j5mt50-1 BNeRR"><g><path fill-rule="evenodd" d="M9.171 4.171A4 4 0 006.343 3H6a4 4 0 00-4 4v.343a4 4 0 001.172 2.829L10 17l6.828-6.828A4 4 0 0018 7.343V7a4 4 0 00-4-4h-.343a4 4 0 00-2.829 1.172L10 5l-.829-.829z" clip-rule="evenodd"></path></g></svg>
@@ -32,14 +35,14 @@
 		text-align: center;
 		fill: #ffff;
 	}
-	[data-tooltip] {
+	:global([data-tooltip]) {
 	  position: relative;
 	  z-index: 100;
 	}
 
 	/* Positioning and visibility settings of the tooltip */
-	[data-tooltip]:before,
-	[data-tooltip]:after {
+	:global([data-tooltip]:before),
+	:global([data-tooltip]:after) {
 	  position: absolute;
 	  visibility: hidden;
 	  opacity: 0;
@@ -51,7 +54,7 @@
 	}
 
 	/* The actual tooltip with a dynamic width */
-	[data-tooltip]:before {
+	:global([data-tooltip]:before) {
 	  content: attr(data-tooltip);
 	  padding: 2px 5px;
 	  width: max-content;
@@ -66,7 +69,7 @@
 	}
 
 	/* Tooltip arrow */
-	[data-tooltip]:after {
+	:global([data-tooltip]:after) {
 	  content: '';
 	  border-style: solid;
 	  border-width: 5px 5px 0px 5px;
@@ -78,65 +81,65 @@
 	}
 
 	/* Tooltip becomes visible at hover */
-	[data-tooltip]:hover:before,
-	[data-tooltip]:hover:after {
+	:global([data-tooltip]:hover:before),
+	:global([data-tooltip]:hover:after) {
 	  visibility: visible;
 	  opacity: 1;
 	}
 	/* Scales from 0.5 to 1 -> grow effect */
-	[data-tooltip]:hover:before {
+	:global([data-tooltip]:hover:before) {
 	  transition-delay: 0.1s;
 	  transform: translate(-50%, -5px) scale(1);
 	}
 	/* 
 	  Arrow slide down effect only on mouseenter (NOT on mouseleave)
 	*/
-	[data-tooltip]:hover:after {
+	:global([data-tooltip]:hover:after) {
 	  transition-delay: 0.1s;
 	  transition-duration: 0.1s;
 	  transform: translateX(-50%) scaleY(1);
 	}
 	/* RIGHT */
-	[data-tooltip-location="right"]:before,
-	[data-tooltip-location="right"]:after {
+	:global([data-tooltip-location="right"]:before),
+	:global([data-tooltip-location="right"]:after) {
 	  left: calc(100% + 5px);
 	  bottom: 50%;
 	}
 
-	[data-tooltip-location="right"]:before {
+	:global([data-tooltip-location="right"]:before) {
 	  transform: translate(5px, 50%) scale(0.5);
 	}
-	[data-tooltip-location="right"]:hover:before {
+	:global([data-tooltip-location="right"]:hover:before) {
 	  transform: translate(5px, 50%) scale(1);
 	}
 
-	[data-tooltip-location="right"]:after {
+	:global([data-tooltip-location="right"]:after) {
 	  border-width: 5px 5px 5px 0px;
 	  border-color: transparent rgba(55, 64, 70, 0.9) transparent transparent;
 	  transform-origin: right;
 	  transform: translateY(50%) scaleX(0);
 	}
-	[data-tooltip-location="right"]:hover:after {
+	:global([data-tooltip-location="right"]:hover:after) {
 	  transform: translateY(50%) scaleX(1);
 	}
 
 
 
 	/* BOTTOM */
-	[data-tooltip-location="bottom"]:before,
-	[data-tooltip-location="bottom"]:after {
+	:global([data-tooltip-location="bottom"]:before),
+	:global([data-tooltip-location="bottom"]:after) {
 	  top: calc(100% + 5px);
 	  bottom: auto;
 	}
 
-	[data-tooltip-location="bottom"]:before {
+	:global([data-tooltip-location="bottom"]:before) {
 	  transform: translate(-50%, 5px) scale(0.5);
 	}
-	[data-tooltip-location="bottom"]:hover:before {
+	:global([data-tooltip-location="bottom"]:hover:before) {
 	  transform: translate(-50%, 5px) scale(1);
 	}
 
-	[data-tooltip-location="bottom"]:after {
+	:global([data-tooltip-location="bottom"]:after) {
 	  border-width: 0px 5px 5px 5px;
 	  border-color: transparent transparent rgba(55, 64, 70, 0.9) transparent;
 	  transform-origin: bottom;

@@ -2,7 +2,7 @@
 	import Loader from '/src/components/Loader.svelte';
 	import ClickOutside from 'svelte-click-outside';
 
-	let triggerEl;
+		let triggerEl;
     let panelVisible = false;
 
 
@@ -38,30 +38,30 @@
 	<ClickOutside on:clickoutside={hidePanel} exclude={[triggerEl]}>
     	<div hidden={!panelVisible} class="sub-menu" >
 
-			<div class="submenu-header">
+				<div class="submenu-header">
 
-				<p class="sub-menu-title">The Ultimate Movie Genres List</p>
+					<p class="sub-menu-title">The Ultimate Movie Genres List</p>
 
-				<div on:click={togglePanel} class="close">
-					<svg version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 cMQeyU"><g><path d="M8.5 10L4 5.5 5.5 4 10 8.5 14.5 4 16 5.5 11.5 10l4.5 4.5-1.5 1.5-4.5-4.5L5.5 16 4 14.5 8.5 10z"></path></g></svg>
+					<div on:click={togglePanel} class="close">
+						<svg version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 cMQeyU"><g><path d="M8.5 10L4 5.5 5.5 4 10 8.5 14.5 4 16 5.5 11.5 10l4.5 4.5-1.5 1.5-4.5-4.5L5.5 16 4 14.5 8.5 10z"></path></g></svg>
+					</div>
+
 				</div>
 
+					<div class="menu-items" >
+							<ul>
+								{#await promise}
+									<Loader />
+								{:then genreArray}
+								  {#each genreArray.genres as {name}}
+								  	<li on:click={togglePanel}>{name}</li>
+								  {/each}
+								{:catch error}
+									<p style="color: red">{error.message}</p>
+								{/await}
+							</ul>
+					</div>
 			</div>
-
-			<div class="menu-items" >
-				<ul>
-					{#await promise}
-						<Loader />
-					{:then genreArray}
-					  {#each genreArray.genres as {name}}
-					  	<li on:click={togglePanel}>{name}</li>
-					  {/each}
-					{:catch error}
-						<p style="color: red">{error.message}</p>
-					{/await}
-				</ul>
-			</div>
-		</div>
   	</ClickOutside>
 </div>
 
@@ -115,9 +115,6 @@
 		box-shadow: 0 1px 10px #00000080,0 10px 8px #00000066;
 		border-bottom: 4px solid #772ce8;
 		border-top: 4px solid #772ce8;
-	}
-	.sub-menu.active{
-		display: block;
 	}
 	.submenu-header{ 
 		min-height: 2.5rem;
