@@ -4,6 +4,7 @@
 
 		let triggerEl;
     let panelVisible = false;
+    export let genreId = [];
 
 
     function togglePanel() {
@@ -13,8 +14,11 @@
     function hidePanel() {
       panelVisible = false;
     }
-
-
+    function sendItem(id) {
+    	genreId = [];
+    	genreId.push(id);
+    	genreId = genreId;
+    }
 	let promise = Promise.resolve([]);
 	async function fetchUsers() {
 		const response = await self.fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=04c35731a5ee918f014970082a0088b1&language=en-US');
@@ -42,19 +46,18 @@
 
 					<p class="sub-menu-title">The Ultimate Movie Genres List</p>
 
-					<div on:click={togglePanel} class="close">
-						<svg version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 cMQeyU"><g><path d="M8.5 10L4 5.5 5.5 4 10 8.5 14.5 4 16 5.5 11.5 10l4.5 4.5-1.5 1.5-4.5-4.5L5.5 16 4 14.5 8.5 10z"></path></g></svg>
+					<div on:click={togglePanel}  class="close">
+						<svg version="1.1" viewBox="0 0 20 20" x="0px" y="0px" ><g><path d="M8.5 10L4 5.5 5.5 4 10 8.5 14.5 4 16 5.5 11.5 10l4.5 4.5-1.5 1.5-4.5-4.5L5.5 16 4 14.5 8.5 10z"></path></g></svg>
 					</div>
 
 				</div>
-
 					<div class="menu-items" >
 							<ul>
 								{#await promise}
 									<Loader />
 								{:then genreArray}
-								  {#each genreArray.genres as {name}}
-								  	<li on:click={togglePanel}>{name}</li>
+								  {#each genreArray.genres as {name,id}}
+								  	<li on:click={sendItem(id)} on:click={togglePanel}>{name}</li>
 								  {/each}
 								{:catch error}
 									<p style="color: red">{error.message}</p>

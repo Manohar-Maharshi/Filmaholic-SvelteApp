@@ -2,27 +2,30 @@
 	import Title from '/src/lib/Title.svelte'
 	import SearchBar from '/src/components/SearchBar.svelte'
 	import NavBarMenus from '/src/lib/NavBar/NavBarMenus.svelte'
-	import GenreTab from '/src/lib/Genre/GenreTab.svelte'
-	import FavoritesTab from '/src/lib/Favorites/FavoritesTab.svelte';
+	// import GenreTab from '/src/lib/Genre/GenreTab.svelte'
+	// import FavoritesTab from '/src/lib/Favorites/FavoritesTab.svelte';
+
+	export let activeOne;
+	export let inputValue;
 
 	export let currentTab;
 	let tabItems = [
+    	{ label: "Now Playing", value: "Now Playing" },
     	{ label: "Popular", value: "Popular" },
     	{ label: "Top Rated", value: "Top Rated" },
     	{ label: "Upcoming", value: "Upcoming" }
 	];
+	console.log(inputValue)
 </script>
-
-
 
 <nav>
 	<Title title="Movie Wiki"/>
-	<SearchBar placeholder="Search Movies"/>
+	<SearchBar bind:value={inputValue} placeholder="Search Movies"/>
 	<div class="aside">
 		<NavBarMenus bind:activeTabValue={currentTab} items={tabItems} />
 		<div class="seperator"></div>
-		<GenreTab />
-		<FavoritesTab />
+		<!-- <GenreTab /> -->
+		<!-- <FavoritesTab /> -->
 	</div>
 </nav>
 

@@ -40,9 +40,9 @@
 <section>
 	<button bind:this={triggerEl} on:click={togglePanel}  class="pannel-toggle-btn {panelVisible ? 'active' : ''}">
 		{#if !panelVisible}
-			Trending Actors Around The World &nbsp <svg version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 cMQeyU"><g><path d="M4 16V4H2v12h2zM13 15l-1.5-1.5L14 11H6V9h8l-2.5-2.5L13 5l5 5-5 5z"></path></g></svg>
+			Trending Actors Around The World &nbsp <svg version="1.1" viewBox="0 0 20 20" x="0px" y="0px"><g><path d="M4 16V4H2v12h2zM13 15l-1.5-1.5L14 11H6V9h8l-2.5-2.5L13 5l5 5-5 5z"></path></g></svg>
 		{:else}
-			<svg version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 cMQeyU"><g><path d="M4 16V4H2v12h2zM13 15l-1.5-1.5L14 11H6V9h8l-2.5-2.5L13 5l5 5-5 5z"></path></g></svg>
+			<svg version="1.1" viewBox="0 0 20 20" x="0px" y="0px"><g><path d="M4 16V4H2v12h2zM13 15l-1.5-1.5L14 11H6V9h8l-2.5-2.5L13 5l5 5-5 5z"></path></g></svg>
 		{/if}
 	</button>
 	<ClickOutside on:clickoutside={hidePanel} exclude={[triggerEl]} class="good">
@@ -65,7 +65,7 @@
 						{/each}
 					{/await}
 				</div>
-	  		<p class="end-text">This list updates daily</p>
+	  		<p class="end-text">This list updates daily...Stay Tuned</p>
 		</div>
 	</ClickOutside>
 </section>
@@ -126,6 +126,7 @@
 		margin-bottom: 0.2rem;
 	}
 	.pannel-toggle-btn{
+		z-index: 999999 !important;
 		border: 0;
 		outline: 0;
 		font-family: inherit;
@@ -140,19 +141,21 @@
 		padding-left: 2rem;
 		border-radius: 0.2rem;
 		cursor: pointer;
-		color: #ffff;
-		background-color: rgba(255, 255, 255, 0.3);
+		color: #fff !important;
+		background-color: #772ce8;
 		transition: 0.3s left,background-color;
 	}
 	.pannel-toggle-btn:hover{
 		left: -1rem;
-		background-color: rgba(255, 255, 255, 0.5);
+		font-weight: bold;
+		color: #fff;
+		background-color: #772ce8 !important;
 	}
 	.pannel-toggle-btn.active{
 		padding:0.5rem 0;
 		padding-right: 0.5rem;
 		left: 31rem;
-		background-color: rgba(255, 255, 255, 0.3);
+		/*background-color: rgba(255, 255, 255, 0.3);*/
 	}
 	.pannel-toggle-btn.active svg{
 		margin-left: 0.5rem;

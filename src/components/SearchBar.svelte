@@ -3,21 +3,23 @@
 	export let placeholder ="";
 
 	let activate = true;
-	function validate() {
-		if(this.value.trim() != ""){
+	function handleClick() {
+		if(this.children[0].value.trim() != "" && this.children[0].value.trim() != undefined){
 			activate = false;
+			value = this.children[0].value;
 		}else{
 			activate = true;
 		}
 	}
+console.log(value)
 </script>
 
-<div class="search-bar">
-	<input bind:value on:keyup="{validate}" type="search" placeholder="{placeholder}">
-	<button class="search-icon {activate ? 'activate' : ''}">
+<form class="search-bar" on:submit|preventDefault={handleClick}>
+	<input bind:value={value} type="search" placeholder="{placeholder}">
+	<button type="submit" class="search-icon {activate ? 'activate' : ''}">
 		<svg version="1.1" viewBox="0 0 20 20" x="0px" y="0px" class="ScIconSVG-sc-1bgeryd-1 cMQeyU"><g><path fill-rule="evenodd" d="M13.192 14.606a7 7 0 111.414-1.414l3.101 3.1-1.414 1.415-3.1-3.1zM14 9A5 5 0 114 9a5 5 0 0110 0z" clip-rule="evenodd"></path></g></svg>
 	</button>
-</div>
+</form>
 
 
 <style>
