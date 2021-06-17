@@ -63,13 +63,21 @@
     	})
     }
    	getMovieThumbData();
+   	function imagePath(path) {
+   		if(path === null){
+   			return	"https://thumbs.gfycat.com/SelfassuredSparklingAlpinegoat-size_restricted.gif"
+   		}
+   		else{
+   			return `https://image.tmdb.org/t/p/original${path}`
+   		}
+   	}
 </script>
 
 <section class="cards-warapper">
 		{#each movieList as {id,backdrop_path,vote_average,title,release_date,original_language,genres}}
 			<div class="card">
 				<div class="stream">
-				  	<img loading="lazy" src="https://image.tmdb.org/t/p/original{backdrop_path}" class="stream__thumbnail" alt="IMAGE">
+				  	<img loading="eager" src="{imagePath(backdrop_path)}" class="stream__thumbnail" alt="IMAGE">
 						<div class="image-stats">
 							<p class="movies-rating">
 								{vote_average} Rating

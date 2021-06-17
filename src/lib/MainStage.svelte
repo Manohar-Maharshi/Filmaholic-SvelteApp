@@ -1,12 +1,13 @@
 <script>
-	import { onMount } from 'svelte';
 	import NavBar from './NavBar/NavBar.svelte';
 	import Actors from './Actors/Actors.svelte';
 	import MovieCard from '/src/lib/MovieCard/MovieCard.svelte'
 
 	let selectedTab;
-	let inputValue;
-
+	let inputVal;
+	let value;
+	
+	$: value = inputVal
 
 	let PopularMoviesUrl = "https://api.themoviedb.org/3/movie/popular?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&page=1"
 	let TopMoviesUrl = "https://api.themoviedb.org/3/movie/top_rated?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&page=1"
@@ -18,35 +19,44 @@
 	
 
 
-	<NavBar bind:inputValue={inputValue} bind:currentTab={selectedTab}/>
+	<NavBar bind:inputValue={inputVal} bind:currentTab={selectedTab}/>
 	<Actors />
-	{inputValue}
 <main>
-	{#if selectedTab === "Popular"}
+	{#if value}
 		<h1>
-			<span class="link">{selectedTab}</span> movies on Internet
+			you searched for <span class="link">"{value}"</span>
 		</h1>
 		<div class="border"></div>
-		<MovieCard loadURL={PopularMoviesUrl}/>
-	{:else if selectedTab === "Top Rated"}
-		<h1>
-			<span class="link">{selectedTab}</span> movies on Internet
-		</h1>
+		<MovieCard loadURL={`https://api.themoviedb.org/3/search/movie?api_key=04c35731a5ee918f014970082a0088b1&language=en-US&query=${value}&page=1&include_adult=true`} />	
 		<div class="border"></div>
-		<MovieCard loadURL={TopMoviesUrl} />
-	{:else if selectedTab === "Now Playing"}
-		<h1>
-			 movies <span class="link">{selectedTab}</span> on theatres
-		</h1>
-		<div class="border"></div>
-		<MovieCard loadURL={NowPlayingMoviesUrl} />
-	{:else}
-		<h1>
-			<span class="link">{selectedTab}</span> movies on Internet
-		</h1>
-		<div class="border"></div>
-		<MovieCard loadURL={NowPlayingMoviesUrl} />
 	{/if}
+		{value = ""}
+		{#if selectedTab === "Popular"}
+			<h1>
+				<span class="link">{selectedTab}</span> movies on Internet
+			</h1>
+			<div class="border"></div>
+			<MovieCard loadURL={PopularMoviesUrl}/>
+		{:else if selectedTab === "Top Rated"}
+			<h1>
+				<span class="link">{selectedTab}</span> movies on Internet
+			</h1>
+			<div class="border"></div>
+			<MovieCard loadURL={TopMoviesUrl} />
+		{:else if selectedTab === "Now Playing"}
+			<h1>
+				 movies <span class="link">{selectedTab}</span> on theatres
+			</h1>
+			<div class="border"></div>
+			<MovieCard loadURL={NowPlayingMoviesUrl} />
+		{:else}
+			<h1>
+				<span class="link">{selectedTab}</span> movies on Internet
+			</h1>
+			<div class="border"></div>
+			<MovieCard loadURL={NowPlayingMoviesUrl} />
+		{/if}
+
 </main>
 
 

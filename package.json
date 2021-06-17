@@ -1,5 +1,5 @@
 {
-  "name": "movi",
+  "name": "Filmaholic",
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
@@ -13,6 +13,7 @@
     "vite": "^2.3.7"
   },
   "dependencies": {
-    "svelte-click-outside": "^1.0.0"
+    "svelte-click-outside": "^1.0.0",
+    "svelte-internet-connection": "^0.1.2"
   }
 }
