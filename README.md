@@ -12,7 +12,7 @@ Twitch is the world's leading video platform and community for gamers. It has be
 
 ## Code Technologies
 
- -  [Svelte](https://svelte.dev/) as a Front-End Framework(Compiler). [Why?](https://youtu.be/AdNJ3fydeao)
+ -  [Svelte](https://svelte.dev/) as a Front-End Framework(Compiler). [Because](https://youtu.be/AdNJ3fydeao)
 
  - [Vite](https://vitejs.dev/) as a build tool for Svelte.
 	> Svelte is *Faster* but with Vite it is *the *Fastest**
