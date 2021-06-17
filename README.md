@@ -23,7 +23,7 @@ Twitch is the world's leading video platform and community for gamers. It has be
 - For Movie Database [TMDB API](https://www.themoviedb.org/). It is the only best choice in entire internet.
 - [svelte-click-outside](https://www.npmjs.com/package/svelte-click-outside) is a small helper component that lets you listen for clicks _outside_ of an element.
 
-## Features
+## Features [Live Demo](https://filmaholic-svelteapp.netlify.app/)
 
  - neat UI
  - Top 20 Movies of Everything
